@@ -29,7 +29,11 @@ dbConnection();
 
 /// Rutas 
 app.use('/api/usuarios', require('./routers/usuarios.routers'))
+app.use('/api/hospitales', require('./routers/hospitales.routers'))
+app.use('/api/medicos', require('./routers/medicos.routers'))
+app.use('/api/todo', require('./routers/busquedas.routers'))
 app.use('/api/login', require('./routers/auth.routers'))
+app.use('/api/upload', require('./routers/uploads.routers'))
 
 
 /**
@@ -57,9 +61,10 @@ app.get( '/api/usuarios', (req, res) => {
     });    
 }) 
 */
-app.listen( 1000, () => {
+app.listen( 1200, () => {
     console.log("Servidor corriendo en el puerto " , process.env.PORT)
 })
+
 /*
 app.listen( process.env.PORT, () => {
     console.log("Servidor corriendo en el puerto " , process.env.PORT)

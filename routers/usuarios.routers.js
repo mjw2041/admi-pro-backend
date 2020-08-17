@@ -12,7 +12,7 @@ const { validarJWT } = require('../middlewares/validar-jwt.middlewares');
 
 const router = Router();
 
-router.get( '/', validarJWT ,getUsuarios ); 
+router.get( '/', getUsuarios ); 
 
 router.post( '/', 
   [     
@@ -31,7 +31,6 @@ router.put('/:id',
       check('email', "El mail tiene que ser valido").isEmail(),
       check('role', "El role es obligatorio....").not().isEmpty(),
       validarCampos
-
   ],
       actualizarUsuario );
 
