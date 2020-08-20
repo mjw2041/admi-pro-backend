@@ -27,6 +27,9 @@ app.use(express.json());
 // Base de Datos 
 dbConnection();
 
+/// Directorio Publico 
+app.use(express.static('public'));
+
 /// Rutas 
 app.use('/api/usuarios', require('./routers/usuarios.routers'))
 app.use('/api/hospitales', require('./routers/hospitales.routers'))
@@ -61,9 +64,10 @@ app.get( '/api/usuarios', (req, res) => {
     });    
 }) 
 */
-app.listen( 1200, () => {
-    console.log("Servidor corriendo en el puerto " , process.env.PORT)
+app.listen( 3000, () => {
+    console.log("Servidor corriendo en el puerto " , 3000)
 })
+
 
 /*
 app.listen( process.env.PORT, () => {
