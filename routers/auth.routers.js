@@ -3,13 +3,13 @@
 */
 
 const { Router } = require('express');
-
-const { login, googleSignIn }  = require('../controllers/auth.controllers');
+const { login, googleSignIn, renewToken }  = require('../controllers/auth.controllers');
 const { check } = require('express-validator');
-
 const { validarCampos} = require('../middlewares/validar-campo.middlewares')
+const { validarJWT } = require('../middlewares/validar-jwt.middlewares')
 
 const router = Router();
+
 
 router.post('/',
     [
@@ -26,6 +26,11 @@ router.post('/google',
         validarCampos,
     ],
     googleSignIn
+);
+
+router.post('/renew',
+    validarJWT,
+    renewToken
 );
 
 module.exports = router;

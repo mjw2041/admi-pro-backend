@@ -1,5 +1,5 @@
 /**
- *   Rutas: /api/hospitales
+ *   Rutas: /api/medicos/
  * 
  */
 
@@ -27,10 +27,16 @@ router.post( '/',
         crearMedico ); 
 
 router.put('/:id', 
-     [],
+     [  
+        validarJWT,
+        check('nombre', 'El nombre del medico es necesario').not().isEmpty(), 
+        check('hospital', 'El ID de hospital debe ser valido').isMongoId(),
+        validarCampos
+     ],     
      actualizarMedico );
 
-router.delete('/:id',            
+router.delete('/:id',  
+          validarJWT,          
           borrarMedico );      
 
 module.exports = router;
