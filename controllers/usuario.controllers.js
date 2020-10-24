@@ -109,7 +109,6 @@ const actualizarUsuario = async ( req, res = response ) => {
             return res.status(400).json({
                 ok: false,
                 msg: 'No existe un usuario por ese UD'
-
             });
         } 
 
@@ -131,7 +130,14 @@ const actualizarUsuario = async ( req, res = response ) => {
             }    
         }        
         /* Le tengo que volver a agregar el campo email */
-        campos.email = email;
+        if ( !usuarioDB.google ) {
+            campos.email = email;
+        } else if ( usuarioDB.email !== email ) {
+            return res.status(400).json( {
+                ok: false,
+                msg: 'Usuariop de Google no pueden cambiar sus mail' 
+            })
+        }
 
         const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, {new: true});
 

@@ -28,7 +28,7 @@ router.post('/google',
     googleSignIn
 );
 
-router.post('/renew',
+router.get('/renew',
     validarJWT,
     renewToken
 );

@@ -13,9 +13,9 @@ const router = Router();
 
 /*const { getHospitales, crearHospital, actualizarHospital, borrarHospital} = require ('../controllers/hospitales.controllers')*/
 
-const { getMedicos, crearMedico, actualizarMedico, borrarMedico } = require ('../controllers/medico.controlers')
+const { getMedicos, crearMedico, actualizarMedico, borrarMedico, getMedicoById } = require ('../controllers/medico.controlers')
 
-router.get( '/' , getMedicos ); 
+router.get( '/' ,validarJWT , getMedicos ); 
 
 router.post( '/', 
         [
@@ -38,5 +38,9 @@ router.put('/:id',
 router.delete('/:id',  
           validarJWT,          
           borrarMedico );      
+
+router.get('/:id',  
+          validarJWT,          
+          getMedicoById );      
 
 module.exports = router;
