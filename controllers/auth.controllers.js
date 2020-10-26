@@ -4,6 +4,7 @@ const Usuario = require('../models/usuario.models' );
 
 const {generarJWT} = require('../helpers/jwt.helpers');
 const { googleVerify } = require('../helpers/google-verify');
+const { getMenuFrontEnd } = require('../helpers/menuFrontEnd');
 /*  
    funcion que contorla el login
 */
@@ -39,7 +40,8 @@ const login = async ( req, res = response ) => {
     
     res.json({
         ok:true,
-        token
+        token,
+        menu: getMenuFrontEnd( usuarioDB.role)
     })
 
   } catch ( error ) {
@@ -87,14 +89,15 @@ const  googleSignIn = async ( req, res = response ) => {
             name,
             email,    
             picture,
-            token      
+            token,
+            menu: getMenuFrontEnd( usuario.role)      
         });
         
     } catch (error) {
         console.log(error);
         res.status(400).json({
             ok: false,
-            msg:'Token Invalido'
+            msg:'Token Invalido'            
         });
         
     }
@@ -109,11 +112,13 @@ const renewToken = async ( req, res = response) => {
     const usuario = await Usuario.findById( uid);
     
     console.log( uid);
+    console.log( usuario);
     
     res.json( {
         ok: true,
         token,
-        usuario
+        usuario,
+        menu: getMenuFrontEnd( usuario.role)
     })
 }
 
